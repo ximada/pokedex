@@ -1,0 +1,12 @@
+.poke-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+ .post{
+     display: inline-block;
+     background-color: rgb(206, 247, 233);
+     border: 1px solid grey;
+     border-radius: 5px;
+     height: 40vh;
+    
+ }
