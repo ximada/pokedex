@@ -69,6 +69,18 @@ invokePokemon.addEventListener('keyup', filterPokemon);
 //     console.log(jsonData);
 // }
 
+// gif pokeball
+const ballEl = document.getElementById("pokeball");
+const startTime = new Date().getTime();
+const walkTheBall = () => {
+    let  currTime = new Date().getTime();
+    let newLeft = (20 + ((currTime - startTime) / 300) * 50);
+    ballEl.style.left = newLeft + "px";
+    window.requestAnimationFrame(walkTheBall)
+
+};
+walkTheBall();
+
 // const pokedexPrintInfo = pokeName => { pokeName.forEach(pokemon => {
 //     const name = pokemon.name
 //    // console.log(name);
