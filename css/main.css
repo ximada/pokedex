@@ -1,12 +1,25 @@
+body{
+    font-family: 'Unlock', cursive;
+}
+
+#all-container{
+    background-image: url(../assets/images/fondo2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    /* background-color: aquamarine */
+}
+
 .poke-container {
     display: flex;
     flex-wrap: wrap;
 }
  .post{
      display: inline-block;
-     background-color: rgb(245, 74, 59);
-     border: 1px solid grey;
+     background-color: rgba(125, 213, 248, 0.5);
+     border: 1px solid rgb(241, 16, 16);
      border-radius: 5px;
-     height: 40vh;
+     height: 45vh;
      
  }
