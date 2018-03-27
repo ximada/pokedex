@@ -10,6 +10,14 @@ body{
 
     /* background-color: aquamarine */
 }
+#pokeball{
+    border-radius: 50%;
+    height: 25vh;
+    position: absolute;
+    left: 0px;
+    width: 15%;
+
+}
 
 .poke-container {
     display: flex;
@@ -18,8 +26,9 @@ body{
  .post{
      display: inline-block;
      background-color: rgba(125, 213, 248, 0.5);
-     border: 1px solid rgb(241, 16, 16);
+     border: 2px dashed rgb(9, 134, 26);
      border-radius: 5px;
      height: 45vh;
+     margin: 2%;
      
  }
