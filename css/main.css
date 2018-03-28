@@ -6,7 +6,7 @@ body{
     background-image: url(../assets/images/fondo2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    /* background-position: center; */
 
     /* background-color: aquamarine */
 }
