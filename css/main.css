@@ -4,7 +4,7 @@ body{
 
 #all-container{
     background-image: url(../assets/images/fondo2.jpg);
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
     /* background-position: center; */
 
@@ -15,7 +15,7 @@ body{
     height: 25vh;
     position: absolute;
     left: 0px;
-    width: 15%;
+    width: 10%;
 
 }
 
@@ -25,10 +25,11 @@ body{
 }
  .post{
      display: inline-block;
-     background-color: rgba(125, 213, 248, 0.5);
-     border: 2px dashed rgb(9, 134, 26);
+     background-color: rgba(238, 238, 247, 0.5);
+     border: 2px dashed rgb(66, 221, 18);
      border-radius: 5px;
      height: 45vh;
      margin: 2%;
+     width: 20%;
      
  }

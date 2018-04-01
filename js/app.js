@@ -2,36 +2,40 @@ const galleryPoke = document.getElementById('gallery-poke');
 const invokePokemon = document.getElementById('invoke-pokemon');
 window.addEventListener('load', () => {
     getJson();
-})
-getJson = (e)=>{
-fetch("https://api.pokemontcg.io/v1/cards/")
-    .then(function (response) {
-        return response.json();
-        
-    })
-    .then(function (data) {
-        //console.log('Request succesful', data);
-        printData(data);
-    })
-    .catch(function (error) {
-        console.log('Request failed', error)
-    });
+});
+//Obteniendo y almacenando la data  de https://graphql-pokemon.now.sh/
+const getJson = (e)=>{
+    if (!localStorage.getItem('data-pokemon')) {
+        $.post({
+            url: 'https://graphql-pokemon.now.sh/',
+            data: JSON.stringify({
+                "query": " {pokemons(first: 150){name image weight{minimum maximum}weaknesses types}} " }),
+            contentType: 'application/json'
+        }).done(function (response) {
+            let pokemonsData = ('Fetched Pokemons:', response.data.pokemons);
+            localStorage.setItem('data-pokemon', JSON.stringify(pokemonsData));
+            printData(localStorage.getItem('data-pokemon'))
+        });
+    } else {
+        printData(localStorage.getItem('data-pokemon'))
+    }
+    
 }
-const printData= data =>{
-  const pokemonsTotal = data.cards;
-  //console.log(pokemonsTotal);
-    pokemonsTotal.forEach(element => {
-        const createPokemon = `<div class='post text-center'> 
-                                <div class='img-post'>
-                                <img src ="${element.imageUrl}" style="width:50%; border-radius:10%;"/>
-                                </div>
-                                <div class="post-content">
-                                <h3 class="pokemon-name">${element.name}</h3>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poke-info" style="color:white; width:40%;">
-                                   More Info...
-                                </button>
-                                </div>
-                                </div>`;
+
+const printData = data => {
+    let pokemonsData = JSON.parse(data)
+    //console.log(pokemonsData);
+    pokemonsData.forEach(element => {
+            const createPokemon = `<div class='post text-center'> 
+                                  <div class='img-post'>
+                                  <img  class="mt-4"src ="${element.image}" style="width:50%; height:20vh; border-radius:10%;"/>                              </div>
+                                  <div class="post-content">
+                                  <h3 class="pokemon-name">${element.name}</h3>
+                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poke-info" data-id="${element.id}" style="color:#ffcc03; width:60%; background:#356ABD">
+                                    More Info...
+                                  </button>
+                                  </div>
+                                  </div>`;
 const containerPokedex = document.createElement("div");
     containerPokedex.classList.add('col-lg-3');
     containerPokedex.classList.add('d-inline');
@@ -39,8 +43,12 @@ const containerPokedex = document.createElement("div");
     containerPokedex.innerHTML= createPokemon;
     galleryPoke.appendChild(containerPokedex);      
     });
-    filterPokemon(pokemonsTotal)
+        
+        
 }
+
+
+
 const filterPokemon = (pokemonsTotal)=>{
     console.log(pokemonsTotal);
     
