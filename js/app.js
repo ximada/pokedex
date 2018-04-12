@@ -1,5 +1,5 @@
 const galleryPoke = document.getElementById('gallery-poke');
-const invokePokemon = document.getElementById('invoke-pokemon');
+
 window.addEventListener('load', () => {
     getJson();
 });
@@ -14,10 +14,13 @@ const getJson = (e)=>{
         }).done(function (response) {
             let pokemonsData = ('Fetched Pokemons:', response.data.pokemons);
             localStorage.setItem('data-pokemon', JSON.stringify(pokemonsData));
-            printData(localStorage.getItem('data-pokemon'))
+            printData(localStorage.getItem('data-pokemon'));
+            
+            
         });
     } else {
-        printData(localStorage.getItem('data-pokemon'))
+        printData(localStorage.getItem('data-pokemon'));
+       
     }
     
 }
@@ -25,149 +28,90 @@ const getJson = (e)=>{
 const printData = data => {
     let pokemonsData = JSON.parse(data)
     //console.log(pokemonsData);
-    pokemonsData.forEach(element => {
-            const createPokemon = `<div class='post text-center'> 
-                                  <div class='img-post'>
-                                  <img  class="mt-4"src ="${element.image}" style="width:50%; height:20vh; border-radius:10%;"/>                              </div>
-                                  <div class="post-content">
-                                  <h3 class="pokemon-name">${element.name}</h3>
-                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poke-info" data-id="${element.id}" style="color:#ffcc03; width:60%; background:#356ABD">
-                                    More Info...
-                                  </button>
-                                  </div>
-                                  </div>`;
-const containerPokedex = document.createElement("div");
-    containerPokedex.classList.add('col-lg-3');
-    containerPokedex.classList.add('d-inline');
-    containerPokedex.classList.add('m-1')
-    containerPokedex.innerHTML= createPokemon;
-    galleryPoke.appendChild(containerPokedex);      
-    });
+    pokemonsData.forEach( function(pokemon,index) {
+        let idPokm= index +1;
+        console.log(id);
         
-        
-}
-
-
-
-const filterPokemon = (pokemonsTotal)=>{
-    console.log(pokemonsTotal);
+        let createPokemon= "";
+        createPokemon += `<div id='poke-modal' class='post text-center' data-toggle="modal" data-target="#poke-info" data-id="${pokemon.id}" data-name="${pokemon.name}" > 
+                            <div class='img-post'>
+                            <img  class="mt-4" src ="${pokemon.image}" style="width:50%; height:20vh; border-radius:10%;"
+                            <div/>                              
+                            <div class="post-content">
+                            <h3 class="pokemon-name">${pokemon.name}</h3>
+                            </div>
+                            </div>`;
+    $(galleryPoke).append(createPokemon);      
+    }); 
+    // data - toggle="modal" data - target="#poke-info" data - id="${pokemon.id}"
     
-    let pokeNames = pokemonsTotal.name;
-    console.log(pokeNames);
+};
+
+
+
+$('#poke-modal').on('show.bs.modal', function (event){
+    console.log(event.target);
     
-    // let inputValue = invokePokemon.value.toLowerCase();
-    // console.log(inputValue)
-    // let prueba = pokeNames.filter(pokedx => {
-    //     return pokedx.name.toLowerCase().indexOf(inputValue) >= 0
+    // let findPokemon = $(event.relatedTarget) // Button that triggered the modal
+    // console.log(findPokemon);
+    // let pokemon = JSON.parse(localStorage.getItem('data-pokemon')).find(pokemon =>{
+    //     return pokemon.id === createPokemon.data('id')
     // });
-    
+    // var modal = $(this)
+    // modal.find('.name-pokemon').text(pokemon.name);
+    // modal.find('.modal-img').attr('src', pokemon.image);
+});
+//filtro busca pokemon especifico
+let invokePokemon = document.getElementById('invoke-pokemon');
+const filterPokemon = ()=>{
+    let jsonPkmData = JSON.parse(localStorage.getItem('data-pokemon'));
+    //console.log(filterPkm);
+    let inputValue = invokePokemon.value.toLowerCase();
+    //console.log(inputValue);
+    let filterPkm = jsonPkmData.filter(pokedx => {
+      return pokedx.name.toLowerCase().indexOf(inputValue) >= 0
+    });
+    //console.log(filterPkm);
+    paintPkmFilter(filterPkm);  
  }
 invokePokemon.addEventListener('keyup', filterPokemon);
-// const datapokemon = jsonData => {
-//     const pokemon = jsonData.results;
-//     // printPokeData(pokemon)
-//     // pokedexPrintInfo(pokemon)
-// }
 
-// $.ajax({
-//     url: `https://api.pokemontcg.io/v1/cards`
-// }).done(datapokemon)
-
-// const printPokeData = jsonData => {
-//     console.log(jsonData);
-// }
+const paintPkmFilter=(filterPkm)=>{
+    galleryPoke.innerText ='';
+    filterPkm.forEach(pokeSearch=>{
+        let templateSearch = `<div class='post text-center'>
+                            <div class='img-post'>
+                            <img class="mt-4" src="${pokeSearch.image}" style="width:50%; height:20vh; border-radius:10%;"
+                            <div/>
+                            <div class="post-content">
+                            <h3 class="pokemon-name">${pokeSearch.name}</h3>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poke-info" data-id="${pokeSearch.id}" data-name="${pokeSearch.name}"  style="color:#ffcc03; width:60%; background:#356ABD">
+                                    More Info...
+                                  </button>
+                        </div>`;
+        $(galleryPoke).append(templateSearch);    
+    });
+}
 
 // gif pokeball
-const ballEl = document.getElementById("pokeball");
-const startTime = new Date().getTime();
-const walkTheBall = () => {
-    let  currTime = new Date().getTime();
-    let newLeft = (20 + ((currTime - startTime) / 300) * 50);
-    ballEl.style.left = newLeft + "px";
-    window.requestAnimationFrame(walkTheBall)
+// const ballEl = document.getElementById("pokeball");
+// const startTime = new Date().getTime();
+// const walkTheBall = () => {
+//     let  currTime = new Date().getTime();
+//     let newLeft = (20 + ((currTime - startTime) / 300) * 50);
+//     ballEl.style.left = newLeft + "px";
+//     window.requestAnimationFrame(walkTheBall)
 
-};
-walkTheBall();
-
-// const pokedexPrintInfo = pokeName => { pokeName.forEach(pokemon => {
-//     const name = pokemon.name
-//    // console.log(name);
-//     const createPokemon =`<div class='post text-center'> 
-//                            <div class='img-post'>
-//                            <img src ="../assets/images/pokemon3.jpg" style="width:50%; border-radius:10%;"/>
-//                            </div>
-//                            <div class="post-content">
-//                                <h3 class="pokemon-name">${name}</h3>
-//                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poke-info" style="color:white; width:40%;">
-//                                   More Info...
-//                                 </button>
-//                           </div>
-//                          </div>`;
-                        
-
-//                 const containerPokedex = document.createElement("div");
-//                 //containerPokedex.classList.add('col');
-//                 containerPokedex.classList.add('d-inline');
-//                 containerPokedex.classList.add('m-1')
-//                 containerPokedex.innerHTML= createPokemon;
-//                 galleryPoke.appendChild(containerPokedex);
-
-//     $.ajax({
-//         url: `https://pokeapi.co/api/v2/pokemon-form/1`
-//     }).done(datapokemon)
-// });}
-
-//  function getPokemon(pokemon){
+// };
+// walkTheBall();
+// const paintModal=()=>{
+//     console.log(event.target.parent);
     
-//     $.ajax({
-//         type: "GET",
-//         url: "https://pokeapi.co/api/v2/pokemon-form/",
-//         async: true,
-//         dataType: "json",
-//         success: function (json) {
-//             console.log(json);
-//             let pokedex = json.pokemon_entries[0].pokemon_species.name;
-//             let urlPpkedex = json.pokemon_entries[0].pokemon_species.url;
-//             console.log(urlPpkedex);
-
-
-
-
-//             // for (var i = 0; i < event.length; i++) {
-//             //     var nameEvent = event[i].name; //nombre del evento
-//             //     var infoEvent = event[i].info; //descripcion del evento 
-//             //     var datesObject = event[i].dates;
-//             //     var dateEvent = datesObject.start.localDate; //fecha del evento
-//             //     var timeEvent = datesObject.start.localTime; //hora del evento
-
-
-//             // }
-
-
-//         },
-//         error: function (xhr, status, err) {
-//             // This time, we do not end up here!
-//         }
-
-
-//     });
-//      $.ajax({
-//          type: "GET",
-//          url: 'https://pokeapi.co/api/v2/pokemon-form/1/',
-//          async: true,
-//          dataType: "json",
-//          success: function (json) {
-//              console.log(json);
-//          },
-//          error: function (xhr, status, err) {
-//              // This time, we do not end up here!
-//          }
-
-
-//      });
-
 // }
-//  getPokemon();
+
+//  $(document).on("click", ".pokemon-name",paintModal)
+
 
 
 
