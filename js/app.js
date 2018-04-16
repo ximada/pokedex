@@ -30,7 +30,7 @@ const printData = data => {
     //console.log(pokemonsData);
     pokemonsData.forEach( function(pokemon,index) {
         let idPokm= index +1;
-        console.log(id);
+        //console.log(id);
         
         let createPokemon= "";
         createPokemon += `<div id='poke-modal' class='post text-center' data-toggle="modal" data-target="#poke-info" data-id="${pokemon.id}" data-name="${pokemon.name}" > 
