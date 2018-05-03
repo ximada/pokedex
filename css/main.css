@@ -20,6 +20,12 @@ body{
     width: 10%;
 
 }
+/*estilos del modal*/
+.modal-content{
+    color: rgb(226, 26, 11);
+    text-align: center;
+    font-weight: bolder;
+}
 
 .poke-container {
     display: flex;
