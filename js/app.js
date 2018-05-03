@@ -15,8 +15,7 @@ const getJson = (e)=>{
             let pokemonsData = ('Fetched Pokemons:', response.data.pokemons);
             localStorage.setItem('data-pokemon', JSON.stringify(pokemonsData));
             printData(localStorage.getItem('data-pokemon'));
-            
-            
+              
         });
     } else {
         printData(localStorage.getItem('data-pokemon'));
@@ -27,19 +26,22 @@ const getJson = (e)=>{
 
 const printData = data => {
     let pokemonsData = JSON.parse(data)
-    //console.log(pokemonsData);
+    console.log(pokemonsData);
     pokemonsData.forEach( function(pokemon,index) {
         let idPokm= index +1;
         //console.log(id);
         
         let createPokemon= "";
-        createPokemon += `<div id='poke-modal' class='post text-center' data-toggle="modal" data-target="#poke-info" data-id="${pokemon.id}" data-name="${pokemon.name}" > 
+        createPokemon += `<div class='post text-center'  > 
                             <div class='img-post'>
                             <img  class="mt-4" src ="${pokemon.image}" style="width:50%; height:20vh; border-radius:10%;"
                             <div/>                              
                             <div class="post-content">
                             <h3 class="pokemon-name">${pokemon.name}</h3>
                             </div>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poke-info" data-id="${pokemon.id}" data-name="${pokemon.name}"  style="color:#ffcc03; width:60%; background:#356ABD">
+                                    More Info...
+                                  </button>
                             </div>`;
     $(galleryPoke).append(createPokemon);      
     }); 
@@ -48,18 +50,22 @@ const printData = data => {
 };
 
 
-
-$('#poke-modal').on('show.bs.modal', function (event){
-    console.log(event.target);
+$('#poke-info').on('show.bs.modal', function (event){
+    let findPokemon = $(event.relatedTarget) // Button that triggered the modal
+    let pokemon = JSON.parse(localStorage.getItem('data-pokemon')).find(pokemon =>{
+         return pokemon.name === findPokemon.data('name')
+     });
+     var modal = $(this)
+     modal.find('.name-pokemon').text(pokemon.name);
+     modal.find('.modal-img').attr('src', pokemon.image);
+     modal.find('.poke-types').text(pokemon.types);
+     modal.find('.poke-weaknesses').text(pokemon.weaknesses);
+     modal.find('.poke-minimum').text(pokemon.weight.minimum);
+     modal.find('.poke-maximum').text(pokemon.weight.maximum);     
+          
+     
+     
     
-    // let findPokemon = $(event.relatedTarget) // Button that triggered the modal
-    // console.log(findPokemon);
-    // let pokemon = JSON.parse(localStorage.getItem('data-pokemon')).find(pokemon =>{
-    //     return pokemon.id === createPokemon.data('id')
-    // });
-    // var modal = $(this)
-    // modal.find('.name-pokemon').text(pokemon.name);
-    // modal.find('.modal-img').attr('src', pokemon.image);
 });
 //filtro busca pokemon especifico
 let invokePokemon = document.getElementById('invoke-pokemon');
