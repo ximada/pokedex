@@ -1,11 +1,13 @@
 body{
-    font-family: 'Unlock', cursive;
+    font-family: 'Play', sans-serif;
 }
 
 #all-container{
     background-image: url(../assets/images/fondo2.jpg);
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+
     /* background-position: center; */
 
     /* background-color: aquamarine */
@@ -28,7 +30,7 @@ body{
      background-color: rgba(238, 238, 247, 0.5);
      border: 3px dashed rgb(66, 221, 18);
      border-radius: 5px;
-     height: 45vh;
+     height: 50vh;
      margin: 2%;
      width: 20%;
      
