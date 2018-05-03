@@ -32,7 +32,7 @@ const printData = data => {
         //console.log(id);
         
         let createPokemon= "";
-        createPokemon += `<div class='post text-center'  > 
+        createPokemon += `<div class='post text-center lg-10'  > 
                             <div class='img-post'>
                             <img  class="mt-4" src ="${pokemon.image}" style="width:50%; height:20vh; border-radius:10%;"
                             <div/>                              
