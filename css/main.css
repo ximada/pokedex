@@ -1,6 +1,10 @@
 body{
     font-family: 'Play', sans-serif;
 }
+h5{
+    text-align: center;
+    font-weight: bolder;
+}
 
 #all-container{
     background-image: url(../assets/images/fondo2.jpg);
@@ -20,6 +24,8 @@ body{
     width: 10%;
 
 }
+
+
 /*estilos del modal*/
 .modal-content{
     color: rgb(226, 26, 11);
