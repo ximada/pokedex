@@ -39,12 +39,12 @@ const printData = data => {
                             <div class="post-content">
                             <h3 class="pokemon-name">${pokemon.name}</h3>
                             </div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poke-info" data-id="${pokemon.id}" data-name="${pokemon.name}"  style="color:#ffcc03; width:60%; background:#356ABD">
-                                    More Info...
-                                  </button>
+                            <img class="ball" src="assets/images/iconepoke.png" alt="images" data-toggle="modal" data-target="#poke-info" data-id="${pokemon.id}" data-name="${pokemon.name}" style=" width:20%;">
                             </div>`;
     $(galleryPoke).append(createPokemon);      
     }); 
+
+   
     // data - toggle="modal" data - target="#poke-info" data - id="${pokemon.id}"
     
 };
@@ -92,9 +92,7 @@ const paintPkmFilter=(filterPkm)=>{
                             <div class="post-content">
                             <h3 class="pokemon-name">${pokeSearch.name}</h3>
                             </div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poke-info" data-id="${pokeSearch.id}" data-name="${pokeSearch.name}"  style="color:#ffcc03; width:60%; background:#356ABD">
-                                    More Info...
-                                  </button>
+                            <img class="ball" src="assets/images/iconepoke.png" alt="images" data-toggle="modal" data-target="#poke-info" data-id="${pokeSearch.id}" data-name="${pokeSearch.name}"  style="width:20%;">
                         </div>`;
         $(galleryPoke).append(templateSearch);    
     });
