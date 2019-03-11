@@ -99,16 +99,16 @@ const paintPkmFilter=(filterPkm)=>{
 }
 
 // gif pokeball
-// const ballEl = document.getElementById("pokeball");
-// const startTime = new Date().getTime();
-// const walkTheBall = () => {
-//     let  currTime = new Date().getTime();
-//     let newLeft = (20 + ((currTime - startTime) / 300) * 50);
-//     ballEl.style.left = newLeft + "px";
-//     window.requestAnimationFrame(walkTheBall)
+const ballEl = document.getElementById("pokeball");
+const startTime = new Date().getTime();
+const walkTheBall = () => {
+let  currTime = new Date().getTime();
+let newLeft = (20 + ((currTime - startTime) / 300) * 50);
+ballEl.style.left = newLeft + "px";
+window.requestAnimationFrame(walkTheBall)
 
-// };
-// walkTheBall();
+};
+walkTheBall();
 // const paintModal=()=>{
 //     console.log(event.target.parent);
     
